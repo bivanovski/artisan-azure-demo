@@ -44,7 +44,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
-      
+
+      - name: Set up environment variables
+        run: |
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+
+        
       - name: Login to Azure
         uses: azure/login@v1
         with:
