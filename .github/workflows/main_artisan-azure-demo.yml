@@ -45,11 +45,6 @@ jobs:
         with:
           name: java-app
 
-      - name: Set up environment variables
-        run: |
-         echo "export DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
-         echo "export DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
-
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -57,6 +52,10 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FFB0D8DE09534E1CBAC939D9B262C7AC }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_5713E1192B4341A48FBEE9D90FB7A3EB }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_EA1C3897AEC64189BE77C6A7922583A2 }}
+
+      - name: Set environment variables in Azure Web App
+        run: |
+          az webapp config appsettings set --name artisan-azure-demo --resource-group your-resource-group --settings DB_USERNAME="${{ secrets.DB_USERNAME }}" DB_PASSWORD="${{ secrets.DB_PASSWORD }}"    
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
