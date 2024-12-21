@@ -11,7 +11,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200") // Replace with specific domain after development
+                        .allowedOrigins("https://artisan-market-agbha5b6dgawfxgt.eastus-01.azurewebsites.net") // Replace with specific domain after development
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
